@@ -1,0 +1,26 @@
+.row.row_temp [class*="col-"] {
+    margin-bottom: 15px;
+}
+
+@media (min-width: 1200px) {
+    .row.row_temp [class*="col-lg-"] {
+        margin-bottom: 15px;
+    }
+    .row_temp{
+      margin-bottom: 0px;
+    }
+}
+
+
+.funkyradio input[type="radio"]:empty{
+  background-color: red;
+   border: 2px solid green;
+   width: 20px;
+   height: 20px;
+   margin: 20px;
+}
+
+.question {
+  height: 46px;
+  font-size: 18px;
+}
