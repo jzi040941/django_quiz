@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href='{% static "student/css/bootstrap.min.css"}' rel="stylesheet">
+
+<!DOCTYPE html>
+{% extends 'student/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class="w3-container" style="width:550px; margin:0 auto">
+  <div class="w3-card-4" style="margin: 0pt auto; width:100%">
+    <header class="w3-container w3-light-grey" style="margin: 0pt auto; width:100%">
+      <h4 style="margin: 0pt auto; witdth:100%; text-align:center">
+        {% for submitAssign in submitassigns|slice:":1" %}
+        <br>
+        <strong>{{submitAssign.assignNum.subjectNum.subjectName}}</strong>
+        <br>
+        <br>
+        {% endfor %}
+      </h4>
+    </header>
+  </div>
+</div>
+<br>
+<br>
+<div class="w3-container" style="width:550px; margin:0 auto">
+    {% for submitAssign in submitassigns %}
+    <div class="w3-card-4" style="margin:0pt; width:100%">
+      <header class="w3-container w3-light-grey" style="margin:0pt; width:100%">
+        <!--
+        <h3 style="text-align:center"> Assign Number : {{submitAssign.assignNum.assignNum}} </h3>
+        -->
+        <h3 style="margin:7pt; width:100%; text-align:center"> <strong>{{ submitAssign.assignNum.assignName }}</strong> </h3>
+      </header>
+      <div class="w3-container" style="margin:0pt; width:100%">
+        <table class="table table-hover table-responsive" style="margin:0pt; width:100%">
+          <tbody>
+          <tr>
+            <!--
+            <td style="margin: 0pt auto; display: table-cell;vertical-align: middle;"><img src='{% static "img/turin_logo.jpg" %}' style="margin-left : 30px; width:100px; height:100px"></td>
+            <td>
+            -->
+            <!--
+            <br>
+            Assign Name : {{ submitAssign.assignNum.assignName }}<br><br>
+            style="margin: 0pt auto; display: table-cell; vertical-align: middle"
+            -->
+            <td>
+            <br>
+            Grade : <strong>{{submitAssign.grade}}</strong><br><br>
+            Published Date : {{submitAssign.assignNum.published_date}}<br><br>
+            </td>
+
+            <td style="vertical-align:middle">
+              <a href="{% url 'student_take_quiz_random' Quiz_Order=submitAssign.assignNum.assignNum %}"
+              type="button"
+              style="color:#A9A9A9;background-color:powderblue; margin: 0pt auto; width:55px; height:55px; display: flex; align-items: center; text-align: center; padding: 7px">
+                 <!--&nbsp;TEST&nbsp;-->
+                TEST
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+<br>
+<br>
+<br>
+{% endfor %}
+
+{% endblock %}

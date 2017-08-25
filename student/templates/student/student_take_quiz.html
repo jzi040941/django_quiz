@@ -1,0 +1,144 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link href='{% static "student/css/student_take_quiz.css" %}' rel="stylesheet">
+<link href='{% static "student/css/funkyradio.css" %}' rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+
+<!--            {{ formsetshortanswerforms.management_form }} -->
+              {{ formsetshortanswerforms.management_form }}
+                {% for short_answer_forms in formsetshortanswerforms %}
+                  <div class="link-formset panel panel-default">
+                    {{ quiz_shortform.id }}
+                    <div class="panel-heading" style="font-size:18px">
+                      {{short_answer_forms.quiz_short.Question}}
+                    </div>
+                    <div class="panel-body">
+                      {{short_answer_forms.answer}}
+                    </div>
+                  </div>
+              {% endfor %}
+
+<!--            {{ formsetoneanswerforms.management_form }} -->
+              {{ formsetoneanswerforms.management_form }}
+                {% for one_answer_forms in formsetoneanswerforms %}
+                  <div class="quiz-one-formset panel panel-default">
+                    {{ quiz_oneform.id }}
+                    <div class="panel-heading">
+                      {{ one_answer_forms.quiz_one.Question }}
+                    </div>
+                    <div class="panel-body">
+                      {# for radio in one_answer_forms.one_answer #}
+
+                      <div class="col-lg-6">
+                        <div class="funkyradio">
+                          <div class="funkyradio-primary">
+                              {{one_answer_forms.one_answer.0.tag}}
+                            <label for="{{one_answer_forms.one_answer.0.id_for_label}}">{{one_answer_forms.quiz_one.Selection_1}}</label>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                      </div>
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              {{one_answer_forms.one_answer.1.tag}}
+                              <label for="{{one_answer_forms.one_answer.1.id_for_label}}"> {{one_answer_forms.quiz_one.Selection_2}}</label>
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              {{one_answer_forms.one_answer.2.tag}}
+                            <label for="{{one_answer_forms.one_answer.2.id_for_label}}">{{one_answer_forms.quiz_one.Selection_3}}</label>
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              {{one_answer_forms.one_answer.3.tag}}
+                              <label for="{{one_answer_forms.one_answer.3.id_for_label}}">  {{one_answer_forms.quiz_one.Selection_4}}</label>
+                            </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                      </div><!-- /row -->
+                      {# endfor #}
+                      </div><!--panel-body-->
+                      <!--</div>--><!-- panel -->
+                      {% endfor %}
+
+
+<!--            {{ formsetmultianswerforms.management_form }} -->
+              {{ formsetmultianswerforms.management_form }}
+              {% for multi_answer_forms in formsetmultianswerforms %}
+              <div class="quiz-multi-formset panel panel-default">
+                <!--<div class="panel panel-default">-->
+                {{ quiz_multiform.id }}
+                  <div class="panel-heading">
+                    {{multi_answer_forms.quiz_multi.Question}}
+                  </div>
+                    <div class="panel-body">
+                      {# for radio in multi_answer_forms.multi_answer #}
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              {{multi_answer_forms.multi_answer.0.tag}}
+                              <label for="{{multi_answer_forms.multi_answer.0.id_for_label}}">{{multi_answer_forms.quiz_multi.Selection_1}}</label>
+                            </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              {{multi_answer_forms.multi_answer.1.tag}}
+                            <label for="{{multi_answer_forms.multi_answer.1.id_for_label}}">{{multi_answer_forms.quiz_multi.Selection_2}}</label>
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              {{multi_answer_forms.multi_answer.2.tag}}
+                          <label for="{{multi_answer_forms.multi_answer.2.id_for_label}}">{{multi_answer_forms.quiz_multi.Selection_3}}</label>
+                        </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              {{multi_answer_forms.multi_answer.3.tag}}
+                          <label for="{{multi_answer_forms.multi_answer.3.id_for_label}}"> {{multi_answer_forms.quiz_multi.Selection_4}}
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                                          {# endfor #}
+                    </div><!--panel-body-->
+                  <!--</div>--><!-- panel -->
+              </div>
+              {% endfor %}
+
+
+            <button type="submit">Submit</button>
+        </form>
+      </div><!--panel-body-->
+      </div><!--panel-->
+
+
+{% endblock %}
+{% block javascript %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'jquery.formset.js' %}"></script>
+{% endblock %}

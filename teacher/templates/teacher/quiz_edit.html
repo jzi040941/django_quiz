@@ -1,0 +1,159 @@
+{% extends 'teacher/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link href='{% static "teacher/css/quiz_edit.css" %}' rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <div class="panel penel-default">
+    <div class="panel-heading"><h1>New Aissgnment</h1></div>
+    <div class="panel-body">
+    <form method="POST" >
+    {% csrf_token %}
+    {% crispy assignmentForm %}
+    {{ quiz_shortformset.management_form }}
+        {% for quiz_shortform in quiz_shortformset %}
+            <div class="link-formset panel panel-default">
+                <!--<div class="panel panel-default">-->
+                {{ quiz_shortform.id }}
+                  <div class="panel-heading">{{quiz_shortform.Question}}</div>
+                    <div class="panel-body">
+                      {{quiz_shortform.Answer}}
+                    </div> <!--panel-body-->
+
+            </div>
+        {% endfor %}
+    {{ quiz_oneformset.management_form }}
+        {% for quiz_oneform in quiz_oneformset %}
+        <div class="quiz-one-formset panel panel-default">
+          {{ quiz_oneform.id }}
+          <!--<div class="panel panel-default">-->
+            <div class="panel-heading">{{quiz_oneform.Question}}</div>
+              <div class="panel-body">
+                {# for radio in quiz_oneform.Check #}
+
+                <div class="row row_temp">
+                  <div class="col-lg-6">
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon" id="sizing-addon1">
+                        {{quiz_oneform.Check.0.tag}}
+                      </span>
+                      {{quiz_oneform.Selection_1}}
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-6">
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon">
+                        {{quiz_oneform.Check.1.tag}}
+                      </span>
+                      {{quiz_oneform.Selection_2}}
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /row -->
+                <div class="row row_temp">
+                  <div class="col-lg-6">
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon">
+                        {{quiz_oneform.Check.2.tag}}
+                      </span>
+                      {{quiz_oneform.Selection_3}}
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                  <div class="col-lg-6">
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-addon">
+                        {{quiz_oneform.Check.3.tag}}
+                      </span>
+                      {{quiz_oneform.Selection_4}}
+                    </div><!-- /input-group -->
+                  </div><!-- /.col-lg-6 -->
+                </div><!-- /row -->
+                {# endfor #}
+              </div><!--panel-body-->
+            <!--</div>--><!-- panel -->
+
+
+        </div>
+        {% endfor %}
+    {{ quiz_multiformset.management_form|crispy }}
+        {% for quiz_multiform in quiz_multiformset %}
+            <div class="quiz-multi-formset panel panel-default">
+              {{ quiz_multiform.id }}
+              <!--<div class="panel panel-default">-->
+                <div class="panel-heading">{{quiz_multiform.Question}}</div>
+                  <div class="panel-body">
+                    {# for radio in quiz_multiform.Check #}
+
+                    <div class="row row_temp">
+                      <div class="col-lg-6">
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon" id="sizing-addon1">
+                            {{quiz_multiform.Check_1}}
+                          </span>
+                          {{quiz_multiform.Selection_1}}
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                      <div class="col-lg-6">
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                            {{quiz_multiform.Check_2}}
+                          </span>
+                          {{quiz_multiform.Selection_2}}
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    </div><!-- /row -->
+                    <div class="row row_temp">
+                      <div class="col-lg-6">
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                            {{quiz_multiform.Check_3}}
+                          </span>
+                          {{quiz_multiform.Selection_3}}
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                      <div class="col-lg-6">
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                            {{quiz_multiform.Check_4}}
+                          </span>
+                          {{quiz_multiform.Selection_4}}
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    </div><!-- /row -->
+                    {# endfor #}
+                  </div><!--panel-body-->
+                <!--</div>--><!-- panel -->
+            </div>
+        {% endfor %}
+        <div class="well"><button type="submit" class="save btn btn-default">Save</button></div>
+    </form>
+  </div><!--panel-body-->
+  </div><!--panel-->
+
+
+    <!-- Include formset plugin - including jQuery dependency -->
+
+{% endblock %}
+
+{% block javascript %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'jquery.formset.js' %}"></script>
+<script>
+    $('.link-formset').formset({
+        addText: 'Add Question',
+        deleteText: 'Delete',
+        prefix: 'quiz_shortform'
+    });
+    $('.quiz-one-formset').formset({
+        addText: 'Add Question',
+        deleteText: 'Delete',
+        prefix: 'quiz_oneform'
+    });
+    $('.quiz-multi-formset').formset({
+        addText: 'Add Question',
+        deleteText: 'Delete',
+        prefix: 'quiz_multiform'
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'student/base.html' %}
+
+{% block content %}
+    {% for subjects in subjects %}
+      <div>
+        <p>Your name: {{subjects.person.username}}</p>
+        <p>Subject: {{subjects.subject}}</p>
+      </div>
+    {% endfor %}
+{% endblock %}

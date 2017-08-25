@@ -1,0 +1,46 @@
+{% extends 'teacher/base.html' %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/thankyou.css' %}">
+{% block content %}
+
+<section id="thankyou">
+  <div class="container">
+    <h1 class="text-center">Thank You</h1>
+    <hr class="star-primary">
+    <div align="center">
+      <img class="img-responsive" src='{% static "img/kiv logo.png" %}' style="">
+      <h5 class="text-center">with</h5>
+      <img class="img-responsive" src='{% static "img/auseoung.png" %}' style="width: 10%; height:100%">
+    </div>
+
+    <hr class="star-primary">
+
+    <div class="row" align="center">
+      <div class="col-sm-3 thankyou-item">
+          <img class="img-responsive" src='{% static "img/photo.jpg" %}' style="">
+          <h4 class="text-center">이름</h4>
+          <h5 class="text-center">역할</h5>
+      </div>
+      <div class="col-sm-3 thankyou-item">
+          <img class="img-responsive" src='{% static "img/photo.jpg" %}' style="">
+          <h4 class="text-center">이름</h4>
+          <h5 class="text-center">역할</h5>
+      </div>
+      <div class="col-sm-3 thankyou-item">
+          <img class="img-responsive" src='{% static "img/photo.jpg" %}' style="">
+          <h4 class="text-center">이름</h4>
+          <h5 class="text-center">역할</h5>
+      </div>
+      <div class="col-sm-3 thankyou-item">
+            <img class="img-responsive" src='{% static "img/photo.jpg" %}' style="">
+            <h4 class="text-center">이름</h4>
+            <h5 class="text-center">역할</h5>
+      </div>
+
+      </div>
+      <div>
+      </div>
+      </div>
+
+</section>
+{% endblock %}

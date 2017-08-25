@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+{% extends 'teacher/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class="w3-container" style="width:550px; margin:0 auto">
+  <div class="w3-card-4" style="margin: 0pt auto; width:100%">
+    <header class="w3-container w3-light-grey" style="margin: 0pt auto; width:100%">
+      <h4 style="margin: 0pt auto; witdth:100%; text-align:center">
+        {% for assignment in assignments|slice:":1" %}
+        <br>
+          <strong>{{assignment.subjectNum.subjectName}}</strong>
+        <br>
+        <br>
+        {% endfor %}
+      </h4>
+    </header>
+  </div>
+  <a href="{% url 'quiz_new' subject_Num=subjectNum %}" class="w3-left w3-button w3-block w3-red" style="width:100%">+Add Test</a>
+</div>
+  <br>
+  <br>
+  <br>
+<div class="w3-container" style="width:550px; margin:0 auto">
+    {% for assignment in assignments %}
+  <div class="w3-card-4" style="margin: 0pt auto; width:100%">
+    <header class="w3-container w3-light-grey" style="margin: 0pt auto; width:100%">
+      <h3 style="text-align:center; margin: 7pt auto; width:100%"><strong>{{assignment.assignName}}</strong></h3>
+    </header>
+    <div class="w3-container" style="margin: 0pt auto; width:100%">
+      <table class="table table-hover table-responsive" style="margin: 0pt auto; width:100%">
+        <tbody>
+        <tr>
+            <td>
+              <br>
+              Published Date : {{assignment.published_date}}
+            </td>
+            <td>
+              <!--
+              <button type="button" class="btn btn-info pull-right">Modify</button>
+            -->
+              <a href="{% url 'quiz_modify' assign_Num=assignment.assignNum %}" type="button"
+              style="color:#A9A9A9;background-color:powderblue; margin: 0pt auto; width:57px; height:57px; display: flex; align-items: center; text-align: center; padding: 4px">
+                 <!--&nbsp;TEST&nbsp;-->
+                Modfiy
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <a href="{% url 'quiz_submit_check' assign_Num=assignment.assignNum %}" class="w3-button w3-block w3-dark-grey">Submitted Information</a>
+  </div>
+  <p><br><br></p>
+{% endfor %}
+{% endblock %}

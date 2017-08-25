@@ -1,0 +1,209 @@
+{% extends 'student/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block css %}
+<link href='{% static "student/css/student_take_quiz.css" %}' rel="stylesheet">
+<link href='{% static "student/css/funkyradio.css" %}' rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<h1> result </h1>
+        <form>
+
+
+<!--            {{ formsetshortanswerforms.management_form }} -->
+              {{ formsetshortanswerforms.management_form }}
+                {% for short_answer_forms in formsetshortanswerforms %}
+
+                {{short_answer_forms.answer_result}}
+                {{formsetshortanswerforms.answer_result}}
+
+                <!--
+                {{short_answer_result}}
+                {{short_answer_forms.answer}}
+                {% if short_answer_result == short_answer_forms.answer %}
+                <p> correct </p>
+                {% else % }
+                <p> wrong </p>
+                {% endif %}
+              -->
+                  <div class="link-formset panel panel-default">
+                    <div class="panel-heading">
+                      <table style="width:100%">
+                      <tr style="width:100%">
+                        <td style="width:10%">
+                      {% if short_answer_forms.correct_short %}
+                      <p style="color:#00FF00"><strong> ✔️</strong></p>
+                      {% else %}
+                      <p style="color:red"><strong>X</strong></p>
+                      {% endif %}
+                    </td>
+                    <td style="width:90%">
+                      {{short_answer_forms.quiz_short.Question}}
+                    </td>
+                  </tr>
+                </table>
+                    </div>
+                    <div class="panel-body">
+                      <fieldset disabled="disabled">
+                      {{short_answer_forms.answer}}
+                      </fieldset>
+                    </div>
+                  </div>
+              {% endfor %}
+
+<!--            {{ formsetoneanswerforms.management_form }} -->
+              {{ formsetoneanswerforms.management_form }}
+                {% for one_answer_forms in formsetoneanswerforms %}
+                  <div class="quiz-one-formset panel panel-default">
+
+                    <div class="panel-heading">
+                      <table style="width:100%">
+                      <tr style="width:100%">
+                        <td style="width:10%">
+                      {% if one_answer_forms.correct_one_check %}
+                      <p style="color:#00FF00"><strong> ✔️</strong></p>
+                      {% else %}
+                      <p style="color:red"><strong>X</strong></p>
+                      {% endif %}
+                    </td>
+                    <td style="width:90%">
+                      {{ one_answer_forms.quiz_one.Question }}
+                    </td>
+                  </tr>
+                </table>
+                    </div>
+                    <div class="panel-body">
+                      {# for radio in one_answer_forms.one_answer #}
+                          <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              <fieldset disabled="disabled">
+                              {{one_answer_forms.one_answer.0.tag}}
+                            <label for="{{one_answer_forms.one_answer.0.id_for_label}}">{{one_answer_forms.quiz_one.Selection_1}}</label>
+                              </fieldset>
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              <fieldset disabled="disabled">
+                              {{one_answer_forms.one_answer.1.tag}}
+                            <label for="{{one_answer_forms.one_answer.1.id_for_label}}">  {{one_answer_forms.quiz_one.Selection_2}}</label>
+                              </fieldset>
+                            </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              <fieldset disabled="disabled">
+                              {{one_answer_forms.one_answer.2.tag}}
+                          <label for="{{one_answer_forms.one_answer.2.id_for_label}}">  {{one_answer_forms.quiz_one.Selection_3}}</label>
+                          </fieldset>
+                        </div>
+                      </div><!-- /funkyradio-primary -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-primary">
+                              <fieldset disabled="disabled">
+                              {{one_answer_forms.one_answer.3.tag}}
+                              <label for="{{one_answer_forms.one_answer.3.id_for_label}}">  {{one_answer_forms.quiz_one.Selection_4}}</label>
+                              </fieldset>
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+                      {# endfor #}
+                      </div><!--panel-body-->
+                      <!--</div>--><!-- panel -->
+                      </div>
+                      {% endfor %}
+
+
+<!--            {{ formsetmultianswerforms.management_form }} -->
+              {{ formsetmultianswerforms.management_form }}
+              {% for multi_answer_forms in formsetmultianswerforms %}
+              <div class="quiz-multi-formset panel panel-default">
+                <!--<div class="panel panel-default">-->
+                  <div class="panel-heading">
+                    <table style="width:100%">
+                    <tr style="width:100%">
+                      <td style="width:10%">
+                    {% if multi_answer_forms.correct_multi_check %}
+                    <p style="color:#00FF00"><strong> ✔️</strong></p>
+                    {% else %}
+                    <p style="color:red"><strong>X</strong></p>
+                    {% endif %}
+                  </td>
+                  <td style="width:90%">
+                    {{multi_answer_forms.quiz_multi.Question}}
+                  </td>
+                </tr>
+              </table>
+                  </div>
+                    <div class="panel-body">
+                      {# for radio in multi_answer_forms.multi_answer #}
+
+
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              <fieldset disabled="disabled">
+                              {{multi_answer_forms.multi_answer.0.tag}}
+                            <label for="{{multi_answer_forms.multi_answer.0.id_for_label}}">  {{multi_answer_forms.quiz_multi.Selection_1}}</label>
+                              </fieldset>
+                            </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              <fieldset disabled="disabled">
+                              {{multi_answer_forms.multi_answer.1.tag}}
+                            <label for="{{multi_answer_forms.multi_answer.1.id_for_label}}">  {{multi_answer_forms.quiz_multi.Selection_2}}</label>
+                            </fieldset>
+                          </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              <fieldset disabled="disabled">
+                              {{multi_answer_forms.multi_answer.2.tag}}
+                              <label for="{{multi_answer_forms.multi_answer.2.id_for_label}}">{{multi_answer_forms.quiz_multi.Selection_3}}</label>
+                              </fieldset>
+                            </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                        <div class="col-lg-6">
+                          <div class="funkyradio">
+                            <div class="funkyradio-warning">
+                              <fieldset disabled="disabled">
+                              {{multi_answer_forms.multi_answer.3.tag}}
+                              <label for="{{multi_answer_forms.multi_answer.3.id_for_label}}">{{multi_answer_forms.quiz_multi.Selection_4}}</label>
+                          </fieldset>
+                        </div>
+                          </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+
+                      {# endfor #}
+                    </div><!--panel-body-->
+                  <!--</div>--><!-- panel -->
+              </div>
+              {% endfor %}
+
+        </form>
+            <h3>for {{questionquantity}} question, {{grade}} Correct</h3>
+            
+            <a class="btn btn-default" href ="{% url 'student_subject' %}">Done</a>
+
+      </div><!--panel-body-->
+      </div><!--panel-->
+
+
+{% endblock %}

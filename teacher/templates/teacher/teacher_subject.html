@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href='{% static "css/bootstrap.min.css"}' rel="stylesheet">
+
+<!DOCTYPE html>
+{% extends 'teacher/test_base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+  <h1 style="text-align:right; color:#000000; padding-right:50pt">
+    Welcome
+    <strong>{{username}}</strong>
+  </h1>
+  <br>
+  <br>
+  <div class="w3-container" style="width:550px; margin:0 auto">
+    <div class="w3-card-4" style="margin:0pt; width:100%">
+      <header style="margin:0pt; width:100%" class="w3-container w3-light-grey">
+        <br>
+        <h3 style="text-align:center; margin:0pt; width:100%"> <strong> SUBJECT LIST </strong> </h3>
+        <br>
+      </header>
+      <div class="w3-container" style="margin:0pt; width:100%">
+        <table class="table table-hover table-responsive" style="margin:0pt; width:100%">
+          <tbody>
+            {% for subject in subjects %}
+              <tr>
+                <td>
+                  <ul style = "margin:5pt; width:100%; list-style-type:square">
+                  <li> <a href="{% url 'teacher_quiz' subject_Num=subject.subjectNum %}">{{subject.subjectName}}</a> </li>
+                  </ul>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+{% endblock %}
